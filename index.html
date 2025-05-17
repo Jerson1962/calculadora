@@ -38,6 +38,15 @@
     .result.visible {
       opacity: 1;
     }
+
+    .copy-btn {
+      margin-top: 10px;
+      display: none;
+    }
+
+    .copy-btn.visible {
+      display: inline-block;
+    }
   </style>
 </head>
 <body>
@@ -49,26 +58,38 @@
   </div>
   <button class="btn btn-primary w-100" onclick="calcular()">Calcular ÷ 1.18</button>
   <div id="resultado" class="result mt-3"></div>
+  <button id="copyButton" class="btn btn-success copy-btn" onclick="copiarResultado()">Copiar resultado</button>
 </div>
 
 <script>
   function calcular() {
     const valor = parseFloat(document.getElementById('inputValue').value);
     const resultado = document.getElementById('resultado');
+    const copyButton = document.getElementById('copyButton');
 
     if (isNaN(valor)) {
       resultado.textContent = "Por favor, ingresa un número válido.";
       resultado.classList.add("visible");
       resultado.style.color = "red";
+      copyButton.classList.remove("visible");
     } else {
       const total = (valor / 1.18).toFixed(2);
       resultado.textContent = `Resultado: ${total}`;
       resultado.classList.add("visible");
       resultado.style.color = "#007bff";
+      copyButton.classList.add("visible");
     }
+  }
+
+  function copiarResultado() {
+    const resultado = document.getElementById('resultado').textContent.replace('Resultado: ', '');
+    navigator.clipboard.writeText(resultado).then(() => {
+      alert("Resultado copiado al portapapeles.");
+    });
   }
 </script>
 
 </body>
 </html>
+
 
