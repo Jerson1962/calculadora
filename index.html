@@ -73,7 +73,7 @@
       resultado.style.color = "red";
       copyButton.classList.remove("visible");
     } else {
-      const total = (valor / 1.18).toFixed(2);
+      const total = (valor / 1.18).toFixed(3); // Mostrar tres decimales
       resultado.textContent = `Resultado: ${total}`;
       resultado.classList.add("visible");
       resultado.style.color = "#007bff";
